@@ -74,8 +74,13 @@ h2 {
   width: 100%;
   border: none;
   /* box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); */
-  padding: 6px 6px;
+  padding: 6px 8px;
   font-size: 18px;
+}
+.todo-item-input:focus {
+  outline: none !important;
+  border: 1px solid #719ece;
+  /* //box-shadow: 0 0 10px #719ECE; */
 }
 
 .line-through {
@@ -138,4 +143,14 @@ h2 {
   margin-top: 22px;
   padding-top: 16px;
   border-top: 1px solid lightgray;
+}
+
+.no-todos-container {
+  width: 300px;
+  margin: 30px auto;
+}
+
+.no-todos-container p {
+  margin-top: 20px;
+  text-align: center;
 }
