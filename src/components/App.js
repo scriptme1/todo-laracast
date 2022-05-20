@@ -1,10 +1,13 @@
-import { useState } from 'react';
-import '../reset.css';
-import '../App.css';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import NoTodos from './NoTodos';
 import TodoForm from './TodoForm';
 import TodoList from './TodoList';
+import '../reset.css';
+import '../App.css';
+
 function App() {
+  const [name, setName] = useState('');
+  const nameInputEl = useRef(null);
   const [todos, setTodos] = useState([
     {
       id: 1,
@@ -14,8 +17,8 @@ function App() {
     },
     {
       id: 2,
-      title: 'Finish Laravel Series',
-      isComplete: false,
+      title: 'Go buy some groceries',
+      isComplete: true,
       isEditing: false,
     },
     {
@@ -24,16 +27,10 @@ function App() {
       isComplete: false,
       isEditing: false,
     },
-    {
-      id: 4,
-      title: 'Practice coding',
-      isComplete: true,
-      isEditing: false,
-    },
   ]);
 
   // const [todoInput, setTodoInput] = useState('');
-  const [todoId, setTodoId] = useState(5);
+  const [todoId, setTodoId] = useState(4);
 
   const addTodo = todo => {
     setTodos([
@@ -98,9 +95,16 @@ function App() {
     });
     setTodos(updatedTodos);
   };
-  const remaining = () => {
+  // const remaining = () => {
+  //   return todos.filter(todo => !todo.isComplete).length;
+  // };
+  function remainingCalculation() {
+    // console.log('calculating remaining todos. This is slow.');
+    // for (let index = 0; index < 2000000000; index++) {}
     return todos.filter(todo => !todo.isComplete).length;
-  };
+  }
+
+  const remaining = useMemo(remainingCalculation, [todos]);
 
   const clearCompleted = () => {
     setTodos([...todos].filter(todo => !todo.isComplete));
@@ -124,10 +128,31 @@ function App() {
       return todos.filter(todo => todo.isComplete);
     }
   }
+  useEffect(() => {
+    nameInputEl.current.focus();
+
+    return function cleanup() {
+      // console.log('cleaning up');
+    };
+  }, []);
 
   return (
     <div className="todo-app-container">
       <div className="todo-app">
+        <div className="name-container">
+          <h2>What is your Name?</h2>
+          <form action="#">
+            <input
+              type="text"
+              ref={nameInputEl}
+              className="todo-input"
+              placeholder="Your Name"
+              value={name}
+              onChange={event => setName(event.target.value)}
+            />
+          </form>
+          {name && <p className="name-label">Hello, {name}</p>}
+        </div>
         <h2>Todo App</h2>
         <TodoForm addTodo={addTodo} />
         {todos.length > 0 ? (
@@ -152,3 +177,4 @@ function App() {
 }
 
 export default App;
+// useRef -- refs allows you to reference DOM Elements
