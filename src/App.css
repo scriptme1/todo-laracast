@@ -172,3 +172,76 @@ h2 {
   margin: 20px 0;
   padding-left: 12px;
 }
+
+/* Transitions */
+
+/* .slide-vertical-enter {
+  opacity: 0;
+}
+.slide-vertical-enter-active {
+  opacity: 1;
+  transition: all 500ms;
+}
+.slide-vertical-exit {
+  opacity: 1;
+}
+.slide-vertical-exit-active {
+  opacity: 0;
+  transition: all 500ms;
+} */
+
+.slide {
+  position: absolute;
+  padding: 0;
+  margin: 0;
+}
+.slide-enter {
+  transform: translateY(-100%) scale(0);
+  opacity: 0;
+  transition: transform 350ms ease-in, opacity 300ms ease-out;
+}
+
+.slide-enter-active,
+.slide-enter-done {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+.slide-exit {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+.slide-exit-active,
+.slide-exit-done {
+  transform: translateY(120%) scale(0);
+  opacity: 0;
+  transition: transform 500ms ease-out, opacity 450ms ease-in;
+}
+
+.slide-horizontal {
+  position: absolute;
+  padding: 0;
+  margin: 0;
+}
+.slide-horizontal-enter {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+.slide-horizontal-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 500ms;
+}
+
+.slide-horizontal-exit {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.slide-horizontal-exit-active {
+  opacity: 0;
+  transition: all 500ms;
+  transform: translateX(20px);
+}
